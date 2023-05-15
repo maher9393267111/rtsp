@@ -5,8 +5,9 @@
   "author": "Mael T.",
   "license": "MIT",
   "scripts": {
-    "start1": "node app.js",
-    "start": "nodemon app.js",
+    "start": "concurrently \"npm run devs\" \"npm run stream\"  ",
+    "try": "concurrently \"npm run stream\" \"npm run devs\"",
+    "devs": "nodemon app.js",
     "clean": "nodemon cleaner.js",
     "dev": "concurrently \"nodemon app.js\" \"ffmpeg.exe -i rtsp://185.217.90.19:554/11  -fflags flush_packets -max_delay 5 -flags -global_header -hls_time 5 -hls_list_size 3 -vcodec copy -y ./videos/test.m3u8\"",
     "stream": "ffmpeg.exe -i rtsp://185.217.90.19:554/11  -fflags flush_packets -max_delay 5 -flags -global_header -hls_time 5 -hls_list_size 3 -vcodec copy -y ./videos/test.m3u8 && nodemon app.js"
